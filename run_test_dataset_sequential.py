@@ -71,9 +71,9 @@ if __name__ == "__main__":
     if accelerator.is_main_process:
         files = NUM_DIRS*NUM_FILES_PER_DIR
         elapsed = progress_bar.format_dict['elapsed']
-        reads_per_second = files/elapsed
+        file_rate = files/elapsed
         lines = ['s: %0.2f' % s,
                  'files: %d' % files,
                  'elapsed: %0.2f' % elapsed,
-                 'reads_per_second: %0.2f' % reads_per_second]
+                 'file_rate: %0.2f' % file_rate]
         print(','.join(lines))
