@@ -7,7 +7,7 @@ import numpy as np
 import os
 import torch
 from accelerate import Accelerator
-from torch.utils.data import Dataset, DataLoader, SequentialSampler
+from torch.utils.data import Dataset, DataLoader
 from tqdm.auto import tqdm
 
 
@@ -38,7 +38,6 @@ class TestDataset(Dataset):
 
 if __name__ == "__main__":
 
-
     accelerator = Accelerator()
 
     dataset = TestDataset(DATASET_DIR, NUM_DIRS, NUM_FILES_PER_DIR)
@@ -46,10 +45,9 @@ if __name__ == "__main__":
     dataloader = DataLoader(
         dataset=dataset,
         batch_size=BATCH_SIZE,
-        shuffle=False,
+        shuffle=True,
         drop_last=True,
         num_workers=NUM_WORKERS,
-        sampler=SequentialSampler(dataset),
     )
 
     dataloader = accelerator.prepare(dataloader)
