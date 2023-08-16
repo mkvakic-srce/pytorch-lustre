@@ -2,6 +2,7 @@
 
 from pathlib import Path
 
+import time
 import numpy as np
 import os
 import torch
@@ -11,14 +12,13 @@ from tqdm.auto import tqdm
 
 
 DATASET_DIR = Path("tempdata")
-NUM_DIRS = 1000
-NUM_FILES_PER_DIR = 10000
-
+NUM_DIRS = int(os.environ['NUM_DIRS'])
+NUM_FILES_PER_DIR = int(os.environ['NUM_FILES_PER_DIR'])
+NUM_WORKERS = int(os.environ['NUM_WORKERS'])
 BATCH_SIZE = 64
-NUM_WORKERS = 4
-
 
 class TestDataset(Dataset):
+
     def __init__(self, root_path, num_dirs, num_files_per_dir):
         super().__init__()
 
@@ -38,8 +38,8 @@ class TestDataset(Dataset):
         )
         return torch.from_numpy(np.load(data_item_path))
 
-
 if __name__ == "__main__":
+
     accelerator = Accelerator()
 
     dataset = TestDataset(DATASET_DIR, NUM_DIRS, NUM_FILES_PER_DIR)
@@ -68,4 +68,11 @@ if __name__ == "__main__":
     accelerator.wait_for_everyone()
 
     if accelerator.is_main_process:
-        print(s)
+        files = NUM_DIRS*NUM_FILES_PER_DIR
+        elapsed = progress_bar.format_dict['elapsed']
+        reads_per_second = files/elapsed
+        lines = ['s: %0.2f' % s,
+                 'files: %d' % files,
+                 'elapsed: %0.2f' % elapsed,
+                 'reads_per_second: %0.2f' % reads_per_second]
+        print(','.join(lines))
