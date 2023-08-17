@@ -2,7 +2,7 @@
 
 module load scientific/pytorch
 export NUM_DIRS=100
-export NUM_FILES_PER_DIR=10000
+export NUM_FILES_PER_DIR=100000
 export CUDA_VISIBLE_DEVICES=${CUDA_VISIBLE_DEVICES:-"0,1"}
 ngpus=$(egrep -o '[0-9]' <<< $CUDA_VISIBLE_DEVICES | wc -l)
 apptainer run \

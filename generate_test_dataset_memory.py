@@ -8,9 +8,9 @@ from tqdm.auto import tqdm
 
 
 DATASET_DIR = Path("tempdata")
-NUM_DIRS = 100
-NUM_FILES_PER_DIR = 1000
-ELEMENT_SIZE = 2048
+NUM_DIRS = int(os.environ['NUM_DIRS'])
+NUM_FILES_PER_DIR = int(os.environ['NUM_FILES_PER_DIR'])
+ELEMENT_SIZE = int(os.environ['ELEMENT_SIZE'])
 
 def create_dir(dir_path):
     if not os.path.exists(dir_path):

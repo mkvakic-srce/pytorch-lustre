@@ -1,3 +1,4 @@
 #!/bin/bash
 
-mksquashfs tempdata tempdata.sqsh -processors 64
+cd ${PBS_O_WORKDIR:-""}
+mksquashfs tempdata tempdata.sqsh 2>/dev/null
