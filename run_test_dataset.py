@@ -10,7 +10,6 @@ from accelerate import Accelerator
 from torch.utils.data import Dataset, DataLoader
 from tqdm.auto import tqdm
 
-
 DATASET_DIR = Path("tempdata")
 NUM_DIRS = int(os.environ['NUM_DIRS'])
 NUM_FILES_PER_DIR = int(os.environ['NUM_FILES_PER_DIR'])

@@ -14,7 +14,7 @@ from tqdm.auto import tqdm
 DATASET_DIR = Path("tempdata")
 NUM_DIRS = int(os.environ['NUM_DIRS'])
 NUM_FILES_PER_DIR = int(os.environ['NUM_FILES_PER_DIR'])
-BATCH_SIZE = 256
+BATCH_SIZE = 64
 
 class TestDataset(Dataset):
 
